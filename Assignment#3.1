@@ -1,1 +1,87 @@
+//program for Room Regestration
+import java.io.PrintWriter;
+import java.io.IOException;
+import javax.swing.*;
 
+class Details {
+    int house;
+    String type;
+    int value;
+    String date;
+    int day;
+    int quantity;
+    int total;
+    
+    Details () {}
+}
+
+class RoomReg{
+
+    public static void main(String[] args) throws IOException {
+        JFrame f = new JFrame();
+        Details t = new Details();
+        PrintWriter out = new PrintWriter("Home Booking.txt ");
+       
+        for (int i = 0 ; i<3;i++)
+        {
+        t.house= Integer.parseInt(JOptionPane.showInputDialog(f,
+                        "Select Type of House: \n1. Bunglow Rm 250/night \n2. Terrace Rm 150/night \n3. Condominium Rm 90/night \n4. Flat Rm 40/night \n5. Low Budget Room Rm 30/night"));
+                            //Input House Type
+
+            if (t.house==1){t.value= 250;t.type= "Bunglow";}    
+            else if (t.house==2){t.value=150;t.type="Terrace"; }
+            else if (t.house==3){t.value=90;t.type="Condominum";}       // Defining the type with value           
+            else if (t.house==4){t.value=40;t.type="Flat";}
+            else if (t.house==5){t.value=30;t.type="Low Budget Room";}
+        t.date= JOptionPane.showInputDialog(f,"Enter Booking Date(DD-MM-YYYY): ");
+
+        t.day= Integer.parseInt(JOptionPane.showInputDialog(f,"Enter The Duration(Days): "));
+        
+        t.quantity=Integer.parseInt(JOptionPane.showInputDialog(f,"Enter People quantity:"));
+
+        t.total= t.day * t.value;
+
+        int choice= JOptionPane.showConfirmDialog(f,"Do you want to book again","Confirmation" ,JOptionPane.YES_NO_OPTION); //Last option for chosing to order again or not
+        
+        
+            System.out.println("|********************|");
+            System.out.println("  Rainbow Homestay");
+            System.out.println("|********************|");
+            System.out.println("Order Number #"+(i+1));
+            System.out.println("\nType Of House: "+t.type);
+            System.out.println("Booking Date: "+t.date);                // Print in concole
+            System.out.println("Days: "+t.day);
+            System.out.println("Price: RM"+t.value+"/night");
+            System.out.println("Quantity: "+t.quantity);
+            System.out.println("Total to pay: RM "+t.total);
+            System.out.println("");
+
+
+
+            out.println("|********************|");
+            out.println("  Rainbow Homestay");
+            out.println("|********************|");
+            out.println("Order Number #"+(i+1));
+            out.println("\nType Of House: "+t.type);                 // Print in txt file
+            out.println("Booking Date: "+t.date);
+            out.println("Days: "+t.day);
+            out.println("Price: RM"+t.value+"/night");
+            out.println("Quantity: "+t.quantity);
+            out.println("Total to pay: RM "+t.total);
+            out.println("");
+
+
+            if(choice==JOptionPane.NO_OPTION){
+                break;}                                 //break the loop
+    
+        }  
+    
+
+    System.out.println("");
+
+        out.close();
+    
+        JOptionPane.showMessageDialog(f,"Your Registration is Successful");
+        System.exit(0);
+    }
+}
