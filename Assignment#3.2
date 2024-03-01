@@ -1,0 +1,67 @@
+// program for calculating salary bonus 
+
+import java.io.PrintWriter;
+import java.io.IOException;
+import javax.swing.*;
+
+
+class Details {
+
+    int id ;
+    String department;
+    int salary;
+    int year;
+    float bonus;
+
+    Details() {}
+    
+}
+
+
+
+class BonusReg{
+
+    public static void main(String[] args) throws IOException{
+
+        JFrame f = new JFrame();
+        Details[] t= new Details[3];
+        PrintWriter out= new PrintWriter("CalBonus.txt");
+
+        for(int i=0;i<3;i++)
+        {
+            t[i]= new Details();
+
+            t[i].id= Integer.parseInt(JOptionPane.showInputDialog(f,"Enter Your Employee ID"));
+            t[i].department= JOptionPane.showInputDialog(f,"Enter Your Department:");
+            t[i].salary= Integer.parseInt(JOptionPane.showInputDialog(f,"Enter Your Current Salary:"));
+            t[i].year= Integer.parseInt(JOptionPane.showInputDialog(f,"Enter Total Years of your Service:"));
+            
+            if(t[i].year<5){t[i].bonus=(float)0.020*t[i].salary;}
+            else if (5<=t[i].year && t[i].year<8){t[i].bonus=(float)0.05*t[i].salary;}
+            else if (8<=t[i].year && t[i].year<10){t[i].bonus=(float)0.07*t[i].salary;}
+            else if (t[i].year>=10){t[i].bonus=(float)0.10*t[i].salary;}  
+        }
+
+        {
+            System.out.printf("---------------------------------------------------------------------%n");
+            System.out.printf("| %-10s | %-15s | %-10s | %-8s | %-10s |%n", "  ID  ", "  DEPARTMENT  "," SALARY "," YEARS "," BONOUS ");
+            System.out.printf("---------------------------------------------------------------------%n");
+           
+            out.printf("---------------------------------------------------------------------%n");
+            out.printf("| %-10s | %-15s | %-10s | %-8s | %-10s |%n", "  ID  ", "  DEPARTMENT  "," SALARY "," YEARS "," BONOUS ");
+            out.printf("---------------------------------------------------------------------%n");
+        }
+
+        for(int i=0;i<3;i++)
+        {
+            System.out.printf("| %-10s | %-15s | %-10s | %-8s | %-10s |%n", (t[i].id), (t[i].department),(t[i].salary),(t[i].year),(t[i].bonus));
+            System.out.printf("---------------------------------------------------------------------%n");
+            
+            out.printf("| %-10s | %-15s | %-10s | %-8s | %-10s |%n", (t[i].id), (t[i].department),(t[i].salary),(t[i].year),(t[i].bonus));
+            out.printf("---------------------------------------------------------------------%n");
+        }
+        
+        out.close();
+        System.exit(0);
+    }
+}

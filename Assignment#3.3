@@ -1,0 +1,114 @@
+// program for overall donation
+
+import java.io.PrintWriter;
+import java.io.IOException;
+import javax.swing.*;
+
+
+class DetailsD{
+String name;
+int classN;
+String className;
+String date;
+float amount;
+float class2b;
+float class2a;
+float class3;
+
+DetailsD(){}
+
+}
+
+
+class CalDonation{
+
+    public static void main(String[] args) throws IOException{
+
+        JFrame f= new JFrame();
+        DetailsD[] t= new DetailsD[6];
+        String[] options ={"Class 2 Amanah","Class 2 Baik","Class 3 Jujur","Class"};
+        PrintWriter out= new PrintWriter("Donation.txt");
+        PrintWriter out1=new PrintWriter("OverallDonations.txt");
+
+        for(int i=0;i<6;i++)
+        {
+            t[i]= new DetailsD();
+
+            t[i].name= JOptionPane.showInputDialog(f,"Enter Your Name:");
+            
+            t[i].className= (String) JOptionPane.showInputDialog(f,"Select Your Class","Class+",JOptionPane.INFORMATION_MESSAGE,null,options,options[3]);
+
+            t[i].date= JOptionPane.showInputDialog(f,"Enter The Date");
+            t[i].amount= Float.parseFloat(JOptionPane.showInputDialog(f,"Enter The Amount"));
+
+            if (t[i].className==options[0]){t[i].class2a += t[i].amount;}
+            else if (t[i].className==options[1]){t[i].class2b+=t[i].amount;}
+            else if (t[i].className==options[2]){t[i].class3+=t[i].amount;}
+
+            if (i > 0) {
+                t[i].class2a += t[i - 1].class2a;
+                t[i].class2b += t[i - 1].class2b;
+                t[i].class3 += t[i - 1].class3;
+            }
+        }
+            System.out.printf("|---------------------------------------------------------------|%n");
+            System.out.printf("| %-10s | %-15s | %-12s | %-15s |%n"," Name "," Class "," Ammount ","  DATE");
+            System.out.printf("|---------------------------------------------------------------|%n");
+
+            out.printf("|---------------------------------------------------------------|%n");
+            out.printf("| %-10s | %-15s | %-12s | %-15s |%n"," Name "," Class "," Ammount ","  DATE");
+            out.printf("|---------------------------------------------------------------|%n");
+        
+        for(int i=0;i<6;i++)
+            {   
+            System.out.printf("| %-10s | %-15s | %-12s | %-15s |%n",(t[i].name),t[i].className,t[i].amount,t[i].date);
+            System.out.printf("|---------------------------------------------------------------|%n");
+
+            out.printf("| %-10s | %-15s | %-12s | %-15s |%n",(t[i].name),t[i].className,t[i].amount,t[i].date);
+            out.printf("|---------------------------------------------------------------|%n");
+            }
+         
+            float highestAmanah = t[5].class2a;
+            float highestBaik = t[5].class2b;
+            float highestJujur = t[5].class3;
+
+            float[] amounts = {highestAmanah, highestBaik, highestJujur};
+            String[] classNames = {options[0], options[1], options[2]};
+
+        // Bubble Sort to rearrange amounts and classNames arrays
+        for (int i = 0; i < amounts.length - 1; i++) {
+            for (int j = 0; j < amounts.length - i-1; j++) {
+            if (amounts[j] < amounts[j + 1]) {
+                // swap amounts
+                float tempAmount = amounts[j];
+                amounts[j] = amounts[j + 1];
+                amounts[j + 1] = tempAmount;
+
+                // swap classNames
+                String tempClassName = classNames[j];
+                classNames[j] = classNames[j + 1];
+                classNames[j + 1] = tempClassName;
+        }
+    }
+}
+
+    System.out.printf("--------------------------------%n");
+    System.out.printf("| %-15s | %-10s |%n", " Class ", " Amount ");
+    System.out.printf("--------------------------------%n");
+
+    out1.printf("--------------------------------%n");
+    out1.printf("| %-15s | %-10s |%n", " Class ", " Amount ");
+    out1.printf("--------------------------------%n");
+
+    for (int i = 0; i < 3; i++) {
+    System.out.printf("| %-15s | %-10s |%n", classNames[i], amounts[i]);
+    System.out.printf("--------------------------------%n");
+
+    out1.printf("| %-15s | %-10s |%n", classNames[i], amounts[i]);
+    out1.printf("--------------------------------%n");
+}
+        out.close();
+        out1.close();   
+        System.exit(0);
+    }
+}
