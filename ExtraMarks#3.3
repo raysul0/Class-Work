@@ -1,0 +1,51 @@
+import javax.swing.*;
+
+class MarksDetails {
+    String name;
+    String matric;
+    String[] subjectNames = new String[3];
+    int[] subjectMarks = new int[3];
+
+    MarksDetails(String name, String matric, String subject1, String subject2, String subject3, int marks1, int marks2, int marks3) {
+        this.name = name;
+        this.matric = matric;
+        this.subjectNames[0] = subject1;
+        this.subjectNames[1] = subject2;
+        this.subjectNames[2] = subject3;
+        this.subjectMarks[0] = marks1;
+        this.subjectMarks[1] = marks2;
+        this.subjectMarks[2] = marks3;
+    }
+
+    void calculateMarks() {
+        int totalMarks = 0;
+        for (int marks : subjectMarks) {
+            totalMarks += marks;
+        }
+        double averageMarks = totalMarks / 3.0;
+        if (averageMarks >= 50) {
+            JOptionPane.showMessageDialog(null, "Congratulations! " + name + " passed the exam.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Sorry! " + name + " failed the exam.");
+        }
+    }
+}
+
+class Result {
+    public static void main(String[] args) {
+        String name = JOptionPane.showInputDialog("Enter Your Name:");
+        String matric = JOptionPane.showInputDialog("Enter Your Matric Number:");
+
+        String subject1 = JOptionPane.showInputDialog("Enter Subject 1 Name:");
+        int marks1 = Integer.parseInt(JOptionPane.showInputDialog("Enter Marks for Subject 1:"));
+
+        String subject2 = JOptionPane.showInputDialog("Enter Subject 2 Name:");
+        int marks2 = Integer.parseInt(JOptionPane.showInputDialog("Enter Marks for Subject 2:"));
+
+        String subject3 = JOptionPane.showInputDialog("Enter Subject 3 Name:");
+        int marks3 = Integer.parseInt(JOptionPane.showInputDialog("Enter Marks for Subject 3:"));
+
+        MarksDetails marksDetails = new MarksDetails(name, matric, subject1, subject2, subject3, marks1, marks2, marks3);
+        marksDetails.calculateMarks();
+    }
+}
