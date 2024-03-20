@@ -1,0 +1,63 @@
+mport java.io.PrintWriter;
+import java.io.IOException;
+import javax.swing.*;
+
+class Book
+{
+    String name;
+    String isbn;
+    float charges;
+    float payment;
+    float balance;
+
+    void due(){
+        charges=Float.parseFloat(JOptionPane.showInputDialog(null,"Enter the charges Sarah needs to pay:"));
+        payment=Float.parseFloat(JOptionPane.showInputDialog(null,"Enter the amount Sarah wants to pay:"));
+        balance = charges - payment;
+        JOptionPane.showMessageDialog(null,"Balance: $" + balance);
+    }
+}
+
+class libraby
+{
+    public static void main(String[]args) throws IOException
+{
+    JFrame f=new JFrame();
+    Book[] bk=new Book[5];
+    Book b= new Book();
+    PrintWriter out=new PrintWriter("Book.txt");
+
+    b.due();
+
+    if (b.balance <= 0) {JOptionPane.showMessageDialog(f,"Sarah can proceed to borrow books.");}
+    else {JOptionPane.showMessageDialog(f,"Please Pay the due before borrowing book");
+        b.due();}
+
+    int p =Integer.parseInt(JOptionPane.showInputDialog(f,"How many books you want to buy?"));
+
+    for (int i = 0; i < p; i++) 
+    {
+        bk[i] = new Book();
+        bk[i].name=JOptionPane.showInputDialog(f,"Enter name of book " + (i + 1) + ":");
+        bk[i].isbn=JOptionPane.showInputDialog(f,"Enter ISBN code of book " + (i + 1) + ":");
+    }
+    
+    {
+        System.out.printf("|-----------------------------------|%n");
+        System.out.printf("| %-10s | %-20s |%n", "Book Name", "Book ISBN");
+        System.out.printf("|-----------------------------------|%n");
+        out.printf("|-----------------------------------|%n");
+        out.printf("| %-10s | %-20s |%n", "Book Name", "Book ISBN");
+        out.printf("|-----------------------------------|%n");
+    }
+    for (int i = 0; i < p; i++) 
+    {
+        System.out.printf("| %-10s | %-20s |%n", bk[i].name,bk[i].isbn);
+        System.out.printf("|-----------------------------------|%n");
+        out.printf("| %-10s | %-20s |%n", bk[i].name,bk[i].isbn);
+        out.printf("|-----------------------------------|%n");
+    }
+    out.close();
+    System.exit(0);
+}
+}
