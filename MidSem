@@ -1,0 +1,70 @@
+import javax.swing.*;
+import java.io.PrintWriter;
+import java.io.IOException;
+
+class Details1{
+    String Name;
+    int Age;
+    Float Weight;
+    String MedHistory;
+    String ItLiterate;
+    String License;
+    String Qualification;
+    int Experience;
+    
+    Details1(){} // Default constructor with no values
+}
+
+class Details2{
+    JFrame f= new JFrame();
+    Details1[] t=new Details1[20];
+
+    Details2(){    
+    for(int i=0;i<1;i++){
+        t[i]=new Details1();
+        t[i].Name=JOptionPane.showInputDialog(f,"Enter Your Name");
+        t[i].Age=Integer.parseInt(JOptionPane.showInputDialog(f,"Enter Your Age"));
+        t[i].Weight=Float.parseFloat(JOptionPane.showInputDialog(f,"Enter Your Weight"));
+        t[i].MedHistory=JOptionPane.showInputDialog(f,"Do you have any MEdical History(Y/N)");
+        t[i].ItLiterate=JOptionPane.showInputDialog(f,"Enter Your It Literate");
+        t[i].License=JOptionPane.showInputDialog(f,"Do you have Car/Motor License(Y/N)");
+        t[i].Qualification=JOptionPane.showInputDialog(f,"Enter Your Qualification(SPM/CERT/DIP/DEG)");
+        t[i].Experience=Integer.parseInt(JOptionPane.showInputDialog(f,"Enter Your Working Experience(Years)"));
+
+
+        if(t[i].Weight>60){String appl = "Rejected";}
+       else if ( t[i].weight<60){String appl="Accepted";}
+    }
+    
+    }
+}
+
+class Recruitment{
+    public static void main(String[]args)throws IOException{
+        Details2 details2=new Details2();
+        Details1[] t = details2.t;
+        PrintWriter out= new PrintWriter("recruitment.txt");
+
+
+        System.out.println("--------------------------------------------------------------------");
+        System.out.printf("| %-15s | %-4s | %-6s | %-20s | %-12s | %-5s | %-5s |%n","Name", "Age", "Weight", "Medical History", "IT literate", "License", "Experience");
+        System.out.println("--------------------------------------------------------------------");
+        
+        out.println("--------------------------------------------------------------------");
+        out.printf("| %-15s | %-4s | %-6s | %-20s | %-12s | %-5s | %-5s |%n","Name", "Age", "Weight", "Medical History", "IT literate", "License", "Experience");
+        out.println("--------------------------------------------------------------------");
+
+        for (int p = 0; p < 1; p++) {
+            System.out.println("--------------------------------------------------------------------");
+            System.out.printf("| %-15s | %-4d | %-6.2f | %-20s | %-12s | %-20s | %-10d |%n",t[p].Name, t[p].Age, t[p].Weight, t[p].MedHistory, t[p].ItLiterate, t[p].License, t[p].Experience);
+            System.out.println("--------------------------------------------------------------------");
+            out.println("--------------------------------------------------------------------");
+            out.printf("| %-15s | %-4d | %-6.2f | %-20s | %-12s | %-20s | %-10d |%n",t[p].Name, t[p].Age, t[p].Weight, t[p].MedHistory, t[p].ItLiterate, t[p].License, t[p].Experience);
+            out.println("--------------------------------------------------------------------");
+        }
+        out.close();
+        System.exit(0);
+        
+    }
+    
+}
