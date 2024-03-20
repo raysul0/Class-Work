@@ -1,0 +1,59 @@
+import javax.swing.*;
+
+class OrderDetails {
+    String[] foodItems = new String[3];
+    String payment;
+
+    OrderDetails(String food1, String food2, String food3, String payment) {
+        foodItems[0] = food1;
+        foodItems[1] = food2;
+        foodItems[2] = food3;
+        this.payment = payment;
+    }
+
+    void print() {
+        String message = "Ordered Foods:\n";
+        for (int i = 0; i < foodItems.length; i++) {
+            message += (i + 1) + ". " + foodItems[i] + "\n";
+        }
+        message += "Payment Method: " + payment;
+        JOptionPane.showMessageDialog(null, message);
+    }
+}
+
+class PersonDetails {
+    String name;
+    String address;
+    String phoneNo;
+
+    PersonDetails(String name, String address, String phoneNo) {
+        this.name = name;
+        this.address = address;
+        this.phoneNo = phoneNo;
+    }
+
+    void print() {
+        String message = "Name: " + name + "\nAddress: " + address + "\nPhone Number: " + phoneNo;
+        JOptionPane.showMessageDialog(null, message);
+    }
+}
+
+class FoodOrderingApplication {
+    public static void main(String[] args) {
+        String name = JOptionPane.showInputDialog("Enter Your Name:");
+        String address = JOptionPane.showInputDialog("Enter Your Address:");
+        String phoneNo = JOptionPane.showInputDialog("Enter Your Phone Number:");
+
+        PersonDetails person = new PersonDetails(name, address, phoneNo);
+
+        String food1 = JOptionPane.showInputDialog("Enter Food Item 1:");
+        String food2 = JOptionPane.showInputDialog("Enter Food Item 2:");
+        String food3 = JOptionPane.showInputDialog("Enter Food Item 3:");
+        String payment = JOptionPane.showInputDialog("Enter Payment Method:(CASH/QR)");
+
+        OrderDetails order = new OrderDetails(food1, food2, food3, payment);
+
+        person.print();
+        order.print();
+    }
+}
