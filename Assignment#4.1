@@ -1,0 +1,48 @@
+import java.io.PrintWriter;
+import java.io.IOException;
+import javax.swing.*;
+
+class House
+{
+    String housetype;
+    String adress;
+}
+
+class Renter extends House
+{
+    String name;
+    String phoneNum;
+    String icNum;
+}
+
+class SingleInheritance
+{
+    public static void main(String[]args) throws IOException
+{
+    JFrame f= new JFrame();
+    PrintWriter out=new PrintWriter("House.txt");
+    Renter r=new Renter();
+
+    r.housetype= JOptionPane.showInputDialog(f,"Enter House Type");
+    r.adress= JOptionPane.showInputDialog(f,"Enter Adress of the House");
+    r.name=  JOptionPane.showInputDialog(f,"Enter name of the Renter");
+    r.phoneNum= JOptionPane.showInputDialog(f,"Enter the Phone Number");
+    r.icNum=  JOptionPane.showInputDialog(f,"Enter IC Number");
+
+    String message = "";
+
+    message += "*#*House Information*#*" + "\n";
+    message += "House Type:" +r.housetype+ "\n";
+    message += "Adress Of the House: "+ r.adress+ "\n" + "\n";
+    message += "*#*Renter Information*#*" + "\n";
+    message += "Name OF the Renter: "+ r.name+ "\n";
+    message += "Phone Number OF the Renter: "+ r.phoneNum+ "\n";
+    message += "IC Number Of the Renter: " + r.icNum + "\n";
+
+    JOptionPane.showMessageDialog(f, message);
+    out.println(message);
+    
+    out.close();
+    System.exit(0);
+}
+}
