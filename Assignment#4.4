@@ -1,0 +1,138 @@
+import java.io.PrintWriter;
+import java.io.IOException;
+import javax.swing.*;
+
+class Faculty
+{
+    String facultyName;
+    String message="";
+    Void faculty(){
+        facultyName= JOptionPane.showInputDialog(null,"Enter Faculty Name: ");
+        message+= "Faculty Name: "+ facultyName + "\n";
+        return null;
+    }
+}
+
+class Lecturer extends Faculty
+{
+    String lecturerName;
+    String lecturerId;
+    void lecturer(){
+        lecturerName= JOptionPane.showInputDialog(null,"Enter Lecturer Name: ");
+        lecturerId= JOptionPane.showInputDialog(null,"Enter Lecturer ID: ");
+        message+= "Lecturer Name: "+lecturerName+ "\n";
+        message+= "Lecturer ID: "+ lecturerId+ "\n";
+    }
+}
+
+class Course extends Lecturer
+{
+    String courseName;
+    String courseCode;
+    void course(){
+        courseName= JOptionPane.showInputDialog(null,"Enter Course Name:");
+        courseCode= JOptionPane.showInputDialog(null,"Enter Course Code:");
+        message+= "Course Name: " + courseName+ "\n";
+        message+= "Course Code: " + courseCode+ "\n";
+    }
+}
+
+class Verify extends Lecturer
+{
+    int numSub;
+    int semester;
+    String group;
+    String[] subject;
+
+    void VerifySub(){
+        semester=Integer.parseInt(JOptionPane.showInputDialog(null,"Enter Your Semester:"));
+        message+= "Semester: "+semester+"\n";
+        group=JOptionPane.showInputDialog(null,"Enter Your group:");
+        message+= "Group: "+group+"\n";
+        numSub = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter How many Subject You Want to Verify"));
+        message+= "Number OF Subject to Verify: "+numSub+"\n";
+        subject = new String[numSub];
+        for(int i=0;i<numSub;i++){
+             subject[i]=JOptionPane.showInputDialog(null,"Enter Subject NO "+(i+1));
+        message+= "Subject No"+(i+1)+":"+subject[i]+"\n";
+        }
+        message+= "All Subject Are Verified"+"\n";
+    }
+}
+
+class Student extends Faculty
+{
+    String studentName;
+    String matricId;
+    void student(){
+        studentName= JOptionPane.showInputDialog(null,"Enter Student Name:");
+        matricId= JOptionPane.showInputDialog(null,"Enter Matric ID:");
+        message+= "Student Name: "+studentName+"\n";
+        message+= "Matric ID: "+matricId+"\n";
+    }
+}
+
+class Registration extends Student
+{
+    int numSub;
+    int semester;
+    String group;
+    String[] subject;
+
+    void AddSub(){
+        semester=Integer.parseInt(JOptionPane.showInputDialog(null,"Enter Your Semester:"));
+        message+= "Semester: "+semester+"\n";
+        group=JOptionPane.showInputDialog(null,"Enter Your group:");
+        message+= "Group: "+group+"\n";
+        numSub = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter How many Subject You Want to Add"));
+        message+= "Number OF Subject to Register: "+numSub+"\n";
+        subject = new String[numSub];
+        for(int i=0;i<numSub;i++){
+             subject[i]=JOptionPane.showInputDialog(null,"Enter Subject NO "+(i+1));
+        message+= "Subject No"+(i+1)+":"+subject[i]+"\n";
+        }
+    }
+    void DropSub(){
+        semester=Integer.parseInt(JOptionPane.showInputDialog(null,"Enter Your Semester:"));
+        message+= "Semester: "+semester+"\n";
+        group=JOptionPane.showInputDialog(null,"Enter Your group:");
+        message+= "Group: "+group+"\n";
+        numSub = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter How many Subject You Want to Drop"));
+        message+= "Number OF Subject to Drop: "+numSub+"\n";
+        subject = new String[numSub];
+        for(int i=0;i<numSub;i++){
+             subject[i]=JOptionPane.showInputDialog(null,"Enter Subject NO "+(i+1));
+        message+= "Subject No"+(i+1)+":"+subject[i]+"\n";
+        }
+    }
+}
+
+class RegCourse
+{
+    public static void main(String[]args)throws IOException
+{   
+    JFrame f= new JFrame();
+    Course c= new Course();
+    Verify v = new Verify();
+    Registration r= new Registration();
+    PrintWriter out= new PrintWriter("Subject.txt");
+    String a ="";
+
+    r.faculty();
+    c.course();
+    String[] options ={"Add Subject","Drop Subject","Verify","Select"};
+    String choice= (String) JOptionPane.showInputDialog(f,"Select Your Action","Input",JOptionPane.INFORMATION_MESSAGE,null,options,options[3]);
+    if(choice.equals(options[0])){r.AddSub(); 
+        a =r.message;}
+    else if(choice.equals(options[1])){r.DropSub(); 
+        a =r.message;}
+    else if(choice.equals(options[2])){v.VerifySub();
+        a= v.message;}   
+
+    out.println(a);
+    JOptionPane.showMessageDialog(null,a);
+    
+    out.close();
+    System.exit(0);
+}
+}
