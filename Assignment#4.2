@@ -1,0 +1,75 @@
+import java.io.PrintWriter;
+import java.io.IOException;
+import javax.swing.*;
+
+class Shape
+{
+    void shapeName (){ System.out.println("Name of the Shape:");}
+}
+
+class Triangle extends Shape 
+{   
+    float base;
+    float height;
+    String message="";
+    void area() {
+        base= Float.parseFloat(JOptionPane.showInputDialog(null,"Enter Base:"));
+        height= Float.parseFloat(JOptionPane.showInputDialog(null,"Enter Height:"));
+        double area = 0.5 * base * height;
+        message += "Area of Triangle: "+area;
+    }
+}
+
+class Square extends Shape
+{
+        float side;
+        String message="";
+    void area() {
+        side= Float.parseFloat(JOptionPane.showInputDialog(null,"Enter Side:"));
+        double area = side * side;
+        message += "Area of Square: "+area;
+    }
+}
+
+class Rectangle extends Shape
+{
+        float base;
+        float height;
+        String message="";
+    void area() {       
+        base= Float.parseFloat(JOptionPane.showInputDialog(null,"Enter Base:"));
+        height= Float.parseFloat(JOptionPane.showInputDialog(null,"Enter Height:"));
+        double area = base * height;
+        message += "Area of Rectangle: "+area;
+    }
+}
+
+class Calculate
+{
+    public static void main(String[]args) throws IOException
+{   
+    JFrame f = new JFrame();
+    Square sq = new Square();
+    Rectangle re = new Rectangle();
+    Triangle tri = new Triangle();
+    PrintWriter out = new PrintWriter("Area Of Shape.txt");
+
+    String[] options ={"Square","Rectangle","Triangle","Shape"};
+    String choice= (String) JOptionPane.showInputDialog(f,"Select Your Shape","Shape+",JOptionPane.INFORMATION_MESSAGE,null,options,options[3]);
+
+    if (choice==options[0]){sq.area();}
+    else if (choice==options[1]){re.area();}
+    else if (choice==options[2]){tri.area();}
+
+    if (choice==options[0]){
+        JOptionPane.showMessageDialog(f,sq.message);
+        out.println(sq.message);}
+    else if (choice==options[1]){JOptionPane.showMessageDialog(f,re.message);
+        out.println(re.message);}
+    else if (choice==options[2]){JOptionPane.showMessageDialog(f,tri.message);
+        out.println(tri.message);}
+    
+        out.close();
+        System.exit(0);
+}
+}
