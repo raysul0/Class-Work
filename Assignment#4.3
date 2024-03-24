@@ -1,0 +1,67 @@
+import java.io.PrintWriter;
+import java.io.IOException;
+import javax.swing.*;
+
+class Subject 
+{
+    String subName;
+    String subCode;
+    void naming(){
+        subName= JOptionPane.showInputDialog(null,"Enter Subject Name:");
+        subCode= JOptionPane.showInputDialog(null,"Enter Subject Code:");
+    }
+}
+
+class Marks extends Subject
+{
+    double[] mark = new double[3];
+    float total= 0;
+
+    void inputmark(){
+        for (int i=0; i<3;i++)
+        {
+            mark[i]=Double.parseDouble(JOptionPane.showInputDialog(null,"Enter Mark for Subject "+(i+1)));
+            total =(float) (total + mark[i]);
+        }
+        total = total/3 ;
+    }
+}
+
+class Grade extends Marks 
+{
+    String grade;
+
+    void grading (){
+        for (int o=0; o<3;o++){
+            if (80<=total && total <100){grade = "A";}
+            else if (70<=total && total <79){grade = "B";}
+            else if (60<=total && total <69){grade = "C";}
+        }
+    }
+}
+
+class SubjectMarking
+{
+    public static void main(String[]args)throws IOException
+{
+    Grade g=new Grade();
+    PrintWriter out = new PrintWriter("Grade.txt");
+
+    g.naming();
+    g.inputmark();
+    g.grading();
+
+    String message = "";
+
+    message += "Subject Name: "+g.subName+ "\n";
+    message += "Subject Code: "+g.subCode+ "\n";
+    message += "Total Mark: "+g.total+ "\n";
+    message += "Grade: "+g.grade+ "\n";
+
+    JOptionPane.showMessageDialog(null,message);
+    out.println(message);
+
+    out.close();
+    System.exit(0);
+}
+}
